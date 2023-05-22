@@ -1,14 +1,17 @@
 import axios from "axios";
 import { EventType } from "../types/types";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL =
+  "https://my-json-server.typicode.com/Code-Pop/Touring-Vue-Router/events/";
 
 export const getAllEvent = async (
-  searchQuery?: string,
+  searchQuery: string,
   filterQuery?: boolean
 ) => {
   const response = await axios.get<EventType[]>(
-    `${API_URL}?q=${searchQuery}&${filterQuery && `petsAllowed=${filterQuery}`}`
+    `${API_URL}?${searchQuery.length > 0 && `q=${searchQuery}`}&${
+      filterQuery && `petsAllowed=${filterQuery}`
+    }`
   );
 
   return response.data;
